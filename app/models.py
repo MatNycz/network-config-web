@@ -23,9 +23,10 @@ class Device(db.Model):
 class Interface(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     device_id = db.Column(db.Integer, db.ForeignKey('device.id'), nullable=False)
-    name = db.Column(db.String(32), nullable=False)  # np. eth0, wlan0
+    name = db.Column(db.String(32), nullable=False)
     ipv4 = db.Column(db.String(16))
     ipv6 = db.Column(db.String(16))
     mask = db.Column(db.String(32))
     
+
     device = db.relationship('Device', backref=db.backref('interfaces', lazy=True))
