@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Logowanie</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="formularz">
+    <h1>Logowanie</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <p class="wpis">
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}
+        </p>
+        <p class="wpis">
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </div>
+</body>
+</html>
