@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Main  page</title>
+         <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                background: white;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            }
+
+            th, td {
+                border: 1px solid #ddd;
+                padding: 10px;
+            }
+
+            th {
+                background-color: #f2f2f2;
+                text-align: left;
+            }
+
+            tr:nth-child(even) {
+                background-color: #fafafa;
+            }
+
+            td {
+                vertical-align: top;
+                word-wrap: break-word;
+                white-space: normal;
+            }
+
+            td:nth-child(3) { /* kolumna Opis */
+                max-width: 400px;
+            }
+            button {
+                padding: 20px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div style=" display: flex; justify-content: space-between; align-items: center; ">
+            <h1>Strona główna</h1>
+            <form action="{{url_for('main.logout')}}" method="post">
+                <button>Wyloguj sie</button>
+            </form>
+        </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nazwa</th>
+                        <th>Status</th>
+                        <th>Data dodania</th>
+                        <th>Akcje</th>
+                     </tr>
+                </thead>
+                <tbody>
+                    {% for device in devices %}
+                    <tr>
+                        <td>{{ device.id }}</td>
+                        <td>{{ device.name }}</td>
+                        <td>{{ device.status }}</td>
+                        <td>{{ device.data_created.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>
+                            <button class="toggle-interfaces" data-device-id="{{ device.id }}">
+                                Pokaż interfejsy
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="interfaces-row" id="interfaces-{{ device.id }}" style="display:none; background:#f9f9f9;">
+                        <td colspan="5">
+                            <ul>
+                                {% for interface in device.interfaces %}
+                                <li>
+                                    <strong>{{ interface.name }}</strong> — IPv4: {{ interface.ipv4 or '-' }}, IPv6: {{ interface.ipv6 or '-' }}, Mask: {{ interface.mask or '-' }}
+                                </li>
+                                {% else %}
+                                <li>Brak interfejsów</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const buttons = document.querySelectorAll('.toggle-interfaces');
+                    buttons.forEach(button => {
+                        button.addEventListener('click', () => {
+                            const deviceId = button.dataset.deviceId;
+                            const row = document.getElementById('interfaces-' + deviceId);
+                            if (row.style.display === 'none') {
+                                row.style.display = 'table-row';
+                                button.textContent = 'Ukryj interfejsy';
+                            } else {
+                                row.style.display = 'none';
+                                button.textContent = 'Pokaż interfejsy';
+                            }
+                        });
+                    });
+                });
+            </script>
+    </body>
+</html>
