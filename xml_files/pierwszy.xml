@@ -1,0 +1,21 @@
+<device>
+    <name>Router1</name>
+    <status>active</status>
+    <interfaces>
+        <interface>
+            <name>eth0</name>
+            <ipv4>192.168.1.3</ipv4>
+            <ipv6>::1</ipv6>
+            <mask>255.255.255.0</mask>
+            <status>up</status>
+        </interface>
+        <interface>
+            <name>eth1</name>
+            <ipv4>10.0.0.1</ipv4>
+            <ipv6></ipv6>
+            <mask>255.0.0.0</mask>
+            <status>up</status>
+        </interface>
+    </interfaces>
+</device>
+

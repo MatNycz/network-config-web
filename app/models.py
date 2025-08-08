@@ -27,6 +27,6 @@ class Interface(db.Model):
     ipv4 = db.Column(db.String(16))
     ipv6 = db.Column(db.String(16))
     mask = db.Column(db.String(32))
+    status = db.Column(db.String(20), default="unknown")
     
-
     device = db.relationship('Device', backref=db.backref('interfaces', lazy=True))
