@@ -46,3 +46,14 @@ python xml_watcher.py
 - Flask-SQLAlchemy + SQLAlchemy – ORM and database management
 - Jinja2 – HTML templating engine
 - SQLite – Database
+## 📸 Screenshots
+
+### login
+![Login](screenshots/login.png)
+
+### main page
+![Main](screenshots/menu.png)
+
+### main page with interface
+![Interface](screenshots/interface.png)
+
