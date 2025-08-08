@@ -14,7 +14,6 @@ Web app parsing XML device configs using flask and SQLite.
 - │
 - ├── run.py # Application entry point
 - ├── requirements.txt # Python dependencies list
-- ├── bugtracker.db # SQLite database file.
 - ├── xml_watcher.py # Likely a script to monitor folder with xml files 
 - └── xml_files # Folder with xml files
 ## ⚙️ Installation and running
@@ -33,7 +32,10 @@ venv\Scripts\activate     # Windows
 # 4️⃣ Install required packages
 pip install -r requirements.txt
 
-# 5️⃣ Run the application
+# 5️⃣ Run the database migrations to create the database schema(add account)
+flask db upgrade
+
+# 6️⃣ Run the application and watcher in separate terminals
 flask run
 python xml_watcher.py
 ```
